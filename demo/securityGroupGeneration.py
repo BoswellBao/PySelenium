@@ -19,6 +19,7 @@ def autogeneration():
 
     time.sleep(5)
     #鼠标悬停在警情上
+    
     mouse = driver.find_element_by_id("actionAlarmManage")
     ActionChains(driver).move_to_element(mouse)
     time.sleep(2)
