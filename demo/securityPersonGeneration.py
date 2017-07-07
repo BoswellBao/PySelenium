@@ -1,5 +1,8 @@
 import time
 from selenium import webdriver
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 def autogeneration_security_person():
@@ -15,18 +18,17 @@ def autogeneration_security_person():
     driver.find_element_by_class_name("but").click()
 
     #进入保安管理
-    time.sleep(10)
-    driver.find_element_by_id("actionAlarmManage").click()
-
-    time.sleep(5)
-    #鼠标悬停在警情上
-    mouse = driver.find_element_by_id("actionAlarmManage")
-    ActionChains(driver).move_to_element(mouse)
-    time.sleep(2)
-    #点击保安管理
-    driver.find_element_by_id("bagl").click()
+    actionAlarmManage = (By.ID, "actionAlarmManage")
+    try:
+        WebDriverWait(driver, 20, 0.5).until(EC.presence_of_element_located(actionAlarmManage))
+    finally:
+        driver.find_element_by_id("actionAlarmManage").click()
     time.sleep(1)
-    nameid = 1
+    #点击保安管理
+    mouse = driver.find_element_by_id("bagl")
+    mouse.click()
+    time.sleep(1)
+
     phone = 18352861000
     for i in range(31):
         #把当前页面所有button放到列表，再从列表中找到要的那个button
@@ -35,7 +37,7 @@ def autogeneration_security_person():
         buttons[3].click()
         time.sleep(1)
         #填写新增信息
-        driver.find_element_by_id("addName").send_keys("保安" + str(nameid))
+        driver.find_element_by_id("addName").send_keys("保安" + str(i))
         driver.find_element_by_id("addPhone").send_keys(phone)
         #把当前页面所有input放到列表，再从列表中找到要的那个input——保安组选择框
         inputs = driver.find_elements(by="tag name", value="input")
@@ -45,7 +47,6 @@ def autogeneration_security_person():
         but_classes = driver.find_elements(by="class name", value="x-btn-text")
         but_classes[-1].click()
         time.sleep(1)
-        nameid += 1
         phone +=1
 
 
