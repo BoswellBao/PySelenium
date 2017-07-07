@@ -2,7 +2,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
-def autogeneration():
+def autogeneration_security_person():
     driver = webdriver.Ie("C:\\Program Files (x86)\\Internet Explorer\\IEDriverServer.exe")
     driver.maximize_window()
     driver.get("http://192.168.1.209")
@@ -10,6 +10,7 @@ def autogeneration():
     driver.find_element_by_id("username").clear()
     driver.find_element_by_id("username").send_keys("admin")
     driver.find_element_by_id("password").clear()
+    time.sleep(1)
     driver.find_element_by_id("password").send_keys("admin")
     driver.find_element_by_class_name("but").click()
 
@@ -49,7 +50,7 @@ def autogeneration():
 
 
 if __name__ == "__main__":
-    autogeneration()
+    autogeneration_security_person()
 
 
 
