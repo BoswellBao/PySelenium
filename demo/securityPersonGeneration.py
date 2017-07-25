@@ -12,12 +12,13 @@ def autogeneration_security_person():
     #登录
     driver.find_element_by_id("username").clear()
     driver.find_element_by_id("username").send_keys("admin")
+
     driver.find_element_by_id("password").clear()
     time.sleep(1)
     driver.find_element_by_id("password").send_keys("admin")
     driver.find_element_by_class_name("but").click()
 
-    #进入保安管理
+    # 进入保安管理
     actionAlarmManage = (By.ID, "actionAlarmManage")
     try:
         WebDriverWait(driver, 20, 0.5).until(EC.presence_of_element_located(actionAlarmManage))
